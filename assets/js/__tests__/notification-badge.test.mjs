@@ -22,4 +22,10 @@ describe('NotificationBadge', () => {
     badge.hide();
     expect(badgeElem.classList.contains('d-none')).toBe(true);
   });
+  
+  test('show() y hide() no fallan si el badge es null', () => {
+    const badge = new NotificationBadge(null);
+    expect(() => badge.show(1)).not.toThrow();
+    expect(() => badge.hide()).not.toThrow();
+  });
 });
