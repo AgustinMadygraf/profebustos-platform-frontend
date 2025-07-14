@@ -15,8 +15,8 @@ class ChatBotApp {
     this.userInteracted = false;
     this.badgePending = false;
     this.chatOpenedEarly = false;
-    this.preventNotification = false; // NUEVO
-        this.isChatOpen = false; // NUEVO
+    this.preventNotification = false;
+    this.isChatOpen = false;
 
     this.notificationBadge.hide();
     console.log('[ChatBotApp] constructor, isChatOpen:', this.isChatOpen);
@@ -24,7 +24,7 @@ class ChatBotApp {
     // Detectar interacción del usuario
     const interactionHandler = () => {
       this.userInteracted = true;
-            if (this.badgePending && !this.preventNotification && !this.isChatOpen) {
+      if (this.badgePending && !this.preventNotification && !this.isChatOpen) {
         this.showBadgeWithSound();
         this.badgePending = false;
       }
@@ -42,8 +42,8 @@ class ChatBotApp {
     this.ui.icon.addEventListener('click', () => {
       logInfo('WhatsApp icon clicked');
       this.ui.showChat();
-           this.notificationBadge.hide(); // Ocultar el badge al abrir el chat
-            this.isChatOpen = true; // NUEVO
+      this.notificationBadge.hide(); // Ocultar el badge al abrir el chat
+      this.isChatOpen = true;
       console.log('[ChatBotApp] chat abierto, isChatOpen:', this.isChatOpen);
       this.logic.startBotTyping();
       // Si el chat se abre antes de los 5 segundos, marca la bandera para omitir notificaciones
@@ -57,25 +57,30 @@ class ChatBotApp {
       const msg = this.ui.userInput.value.trim();
       if (msg) {
         logInfo('Mensaje de usuario enviado: ' + msg);
-      console.log('[ChatBotApp] chat cerrado, isChatOpen:', this.isChatOpen);
+        console.log('[ChatBotApp] chat cerrado, isChatOpen:', this.isChatOpen);
         this.ui.showUserMessage(msg);
         this.ui.userInput.value = '';
       }
     });
 
     // Evento para cerrar el chat
-      console.log('[ChatBotApp] chat cerrado (back), isChatOpen:', this.isChatOpen);
+    console.log('[ChatBotApp] chat cerrado (back), isChatOpen:', this.isChatOpen);
     this.ui.closeBtn.addEventListener('click', () => {
       logInfo('Minimize (close) button clicked');
       this.ui.hideChat();
-            this.isChatOpen = false; // NUEVO
-      console.log('[ChatBotApp] setTimeout fired, isChatOpen:', this.isChatOpen, 'preventNotification:', this.preventNotification);
+      this.isChatOpen = false; // NUEVO
+      console.log(
+        '[ChatBotApp] setTimeout fired, isChatOpen:',
+        this.isChatOpen,
+        'preventNotification:',
+        this.preventNotification,
+      );
     });
 
     this.ui.backBtn.addEventListener('click', () => {
       logInfo('Minimize (back) button clicked');
       this.ui.hideChat();
-            this.isChatOpen = false; // NUEVO
+      this.isChatOpen = false; // NUEVO
     });
 
     // Esperar 5 segundos
@@ -99,20 +104,23 @@ class ChatBotApp {
   }
 }
 
-
 function createApp() {
   var ui = new ChatBotUI();
   var logic = new BotLogic(ui);
   var soundPlayer = new SoundPlayer('assets/sounds/whatsapp-notification.m4a');
   var notificationBadge = new NotificationBadge(ui.badge);
-  new ChatBotApp({ ui: ui, logic: logic, soundPlayer: soundPlayer, notificationBadge: notificationBadge });
+  new ChatBotApp({
+    ui: ui,
+    logic: logic,
+    soundPlayer: soundPlayer,
+    notificationBadge: notificationBadge,
+  });
 }
-
 
 // Solo ejecuta createApp automáticamente si no está en entorno de test (Jest)
 if (typeof process === 'undefined' || !process.env.JEST_WORKER_ID) {
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       console.log('[chatbot-bundle.js] DOMContentLoaded');
       createApp();
     });

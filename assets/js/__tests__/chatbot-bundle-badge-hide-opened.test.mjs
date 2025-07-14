@@ -30,11 +30,11 @@ describe('Integración: El badge no reaparece si el chat está abierto', () => {
     iconElem = ui.icon;
   });
 
-test('El badge no se muestra tras abrir el chat y esperar notificación', async () => {
-  // Simular apertura de chat
-  iconElem.click();
-  // Esperar el timeout de notificación (5s)
-  await new Promise((resolve) => setTimeout(resolve, 5200));
-  expect(badgeElem.classList.contains('d-none')).toBe(true);
-}, 7000);
+  test('El badge no se muestra tras abrir el chat y esperar notificación', async () => {
+    // Simular apertura de chat
+    iconElem.click();
+    // Esperar el timeout de notificación (5s)
+    await new Promise((resolve) => setTimeout(resolve, 5200));
+    expect(badgeElem.classList.contains('d-none')).toBe(true);
+  }, 7000);
 });
