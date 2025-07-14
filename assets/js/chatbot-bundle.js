@@ -1,6 +1,9 @@
 console.log("[chatbot-bundle.js] Script cargado");
+
 import { ChatBotUI } from './chatbot-ui.js';
 import { BotLogic } from './bot-logic.js';
+import { SoundPlayer } from './sound-player.js';
+import { NotificationBadge } from './notification-badge.js';
 
 class ChatBotApp {
   constructor() {
@@ -12,7 +15,10 @@ class ChatBotApp {
     this.chatOpenedEarly = false;
     this.preventNotification = false; // NUEVO
 
-    this.ui.setBadge(false);
+
+    this.notificationBadge = new NotificationBadge(this.ui.badge);
+    this.soundPlayer = new SoundPlayer('assets/sounds/whatsapp-notification.m4a');
+    this.notificationBadge.hide();
 
     // Detectar interacción del usuario
     const interactionHandler = () => {
@@ -67,7 +73,7 @@ class ChatBotApp {
         if (this.userInteracted) {
           this.showBadgeWithSound();
         } else {
-          this.ui.setBadge(true, 1);
+          this.notificationBadge.show(1);
           this.badgePending = true;
         }
       }
@@ -75,9 +81,9 @@ class ChatBotApp {
   }
 
   showBadgeWithSound() {
-    this.ui.setBadge(true, 1);
-    const audio = new Audio('assets/sounds/whatsapp-notification.m4a');
-    audio.play().catch(e => console.error("Audio error:", e));
+    this.soundPlayer.play(() => {
+      this.notificationBadge.show(1);
+    });
   }
 }
 

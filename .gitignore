@@ -1,2 +1,4 @@
 docs/aux_info.md
 todo.txt
+node_modules/
+coverage/
