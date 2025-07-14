@@ -92,9 +92,10 @@ class ChatBotApp {
   }
 
   showBadgeWithSound() {
-    this.soundPlayer.play(() => {
-      this.notificationBadge.show(1);
-    });
+    this.notificationBadge.show(1);
+    setTimeout(() => {
+      this.soundPlayer.play();
+    }, 0);
   }
 }
 

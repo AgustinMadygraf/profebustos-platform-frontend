@@ -5,6 +5,7 @@ export class SoundPlayer {
     this.audio = new Audio(src);
   }
   play(onEnd) {
+    console.log('[SoundPlayer] play called, audio src:', this.audio.src);
     this.audio.currentTime = 0;
     this.audio.play().catch((e) => logError('Audio error', e));
     if (typeof onEnd === 'function') {
