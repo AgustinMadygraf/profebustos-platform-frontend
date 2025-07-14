@@ -1,14 +1,96 @@
 console.log("[chatbot-bundle.js] Script cargado");
-class ChatBotUI{constructor(){this.icon=document.getElementById("whatsapp-icon");this.chat=document.getElementById("whatsapp-chat");this.badge=document.getElementById("whatsapp-badge");this.closeBtn=document.getElementById("whatsapp-close");this.backBtn=document.getElementById("whatsapp-back");this.botTyping=document.getElementById("bot-typing");this.botMessageDiv=document.getElementById("bot-message");}showChat(){this.chat.classList.remove("d-none");this.icon.classList.add("d-none");this.badge.classList.add("d-none");}hideChat(b){this.chat.classList.add("d-none");this.icon.classList.remove("d-none");if(!b)this.badge.classList.remove("d-none");}setBadge(v){this.badge.classList.toggle("d-none",!v);}setBotTyping(t){this.botTyping.textContent=t;}adjustChatSize(){if(window.innerWidth<768){this.chat.style.width="100vw";this.chat.style.height="100vh";this.chat.style.borderRadius="0";}else{this.chat.style.width="350px";this.chat.style.height="420px";this.chat.style.borderRadius="1.5rem";}}}
-class BotLogic{constructor(u){this.ui=u;this.botAnswered=false;}startBotTyping(){this.ui.setBotTyping("escribiendo...");setTimeout(()=>{this.streamBotResponse("¡Hola! ¿En qué puedo ayudarte?");},1200);}streamBotResponse(t){this.ui.setBotTyping("");let i=0;const typeLetter=()=>{if(i<t.length){this.ui.botTyping.textContent+=t[i];i++;setTimeout(typeLetter,40);}else{this.botAnswered=true;this.ui.setBadge(true);}};typeLetter();}}
-class ChatBotApp{constructor(){this.ui=new ChatBotUI;this.logic=new BotLogic(this.ui);this.ui.icon.addEventListener("click",()=>{this.ui.showChat();this.logic.startBotTyping();});this.ui.closeBtn.addEventListener("click",()=>{this.ui.hideChat(this.logic.botAnswered);});this.ui.backBtn.addEventListener("click",()=>{this.ui.hideChat(this.logic.botAnswered);});this.ui.chat.addEventListener("transitionend",()=>{if(!this.ui.chat.classList.contains("d-none")){this.logic.botAnswered=false;this.ui.setBadge(false);}});window.addEventListener("resize",()=>this.ui.adjustChatSize());this.ui.adjustChatSize();}}
+import { ChatBotUI } from './chatbot-ui.js';
+import { BotLogic } from './bot-logic.js';
+
+class ChatBotApp {
+  constructor() {
+    this.ui = new ChatBotUI();
+    this.logic = new BotLogic(this.ui);
+
+    this.userInteracted = false;
+    this.badgePending = false;
+    this.chatOpenedEarly = false;
+    this.preventNotification = false; // NUEVO
+
+    this.ui.setBadge(false);
+
+    // Detectar interacción del usuario
+    const interactionHandler = () => {
+      this.userInteracted = true;
+      if (this.badgePending && !this.preventNotification) {
+        this.showBadgeWithSound();
+        this.badgePending = false;
+      }
+      window.removeEventListener('click', interactionHandler);
+      window.removeEventListener('touchstart', interactionHandler);
+      window.removeEventListener('keydown', interactionHandler);
+    };
+
+    window.addEventListener('click', interactionHandler);
+    window.addEventListener('touchstart', interactionHandler);
+    window.addEventListener('keydown', interactionHandler);
+
+    // Evento para abrir el chat
+    this.ui.icon.addEventListener("click", () => {
+      console.log("[ChatBotApp] WhatsApp icon clicked");
+      this.ui.showChat();
+      this.logic.startBotTyping();
+      // Si el chat se abre antes de los 5 segundos, marca la bandera para omitir notificaciones
+      if (!this.badgePending) {
+        this.preventNotification = true;
+      }
+    });
+
+    // Evento para enviar mensaje
+    this.ui.sendBtn.addEventListener("click", () => {
+      const msg = this.ui.userInput.value.trim();
+      if (msg) {
+        this.ui.showUserMessage(msg);
+        this.ui.userInput.value = "";
+      }
+    });
+
+    // Evento para cerrar el chat
+    this.ui.closeBtn.addEventListener("click", () => {
+      console.log("[ChatBotApp] Minimize (close) button clicked");
+      this.ui.hideChat();
+    });
+
+    this.ui.backBtn.addEventListener("click", () => {
+      console.log("[ChatBotApp] Minimize (back) button clicked");
+      this.ui.hideChat();
+    });
+
+    // Esperar 5 segundos
+    setTimeout(() => {
+      if (!this.preventNotification) {
+        if (this.userInteracted) {
+          this.showBadgeWithSound();
+        } else {
+          this.ui.setBadge(true, 1);
+          this.badgePending = true;
+        }
+      }
+    }, 5000);
+  }
+
+  showBadgeWithSound() {
+    this.ui.setBadge(true, 1);
+    const audio = new Audio('assets/sounds/whatsapp-notification.m4a');
+    audio.play().catch(e => console.error("Audio error:", e));
+  }
+}
+
+
 if (document.readyState === "loading") {
-if(document.readyState==="loading"){
-  document.addEventListener("DOMContentLoaded",()=>{console.log("[chatbot-bundle.js] DOMContentLoaded");new ChatBotApp;});
+  document.addEventListener("DOMContentLoaded",()=>{console.log("[chatbot-bundle.js] DOMContentLoaded");
+  new ChatBotApp();
+});
+
 }else{
   console.log("[chatbot-bundle.js] DOM ya cargado");
-  new ChatBotApp;
-}
-} else {
+
   new ChatBotApp();
+
 }
+console.log("[chatbot-bundle.js] Script ejecutado");

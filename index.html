@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" media="(min-width: 481px)">
-    <noscript>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    </noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -111,7 +108,7 @@
         srcset="img/whatsapp-32.webp 32w, img/whatsapp-64.webp 64w"
         sizes="(max-width: 480px) 32px, 64px">
     </picture>
-    <span id="whatsapp-badge" class="badge bg-danger position-absolute top-0 end-0 translate-middle p-2 rounded-circle">1</span>
+    <span id="whatsapp-badge" class="badge bg-danger position-absolute" style="top:-8px; right:-8px; z-index:2; padding:0.5em 0.6em; font-size:0.85em;">1</span>
   </div>
   <!-- Chat -->
   <div id="whatsapp-chat" class="bg-white border rounded-4 shadow-lg position-fixed bottom-0 end-0 d-none flex-column" style="width:350px; max-width:95vw; height:420px; max-height:90vh; min-height:420px;">
@@ -128,8 +125,13 @@
           <span id="bot-typing">escribiendo...</span>
         </div>
       </div>
+      <div id="whatsapp-messages" class="mb-2"></div>
     </div>
-    <!-- No footer, formulario eliminado -->
+    <!-- User input -->
+    <div class="input-group mt-2">
+      <input type="text" id="whatsapp-user-input" class="form-control" placeholder="Escribe tu mensaje...">
+      <button id="whatsapp-send-btn" class="btn btn-success" type="button">Enviar</button>
+    </div>
   </div>
 </div>
 <!-- Fin WhatsApp Chat Widget -->
@@ -138,21 +140,6 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="assets/js/main.js" defer></script>
-    <script>
-    document.getElementById('whatsapp-icon').addEventListener('click', function loadChatbotScript(e) {
-        if (!window.chatbotLoaded) {
-        var s = document.createElement('script');
-        s.src = 'assets/js/chatbot-bundle.js';
-        s.defer = true;
-        s.onload = function() {
-            // Simula el clic original para abrir el chat
-            document.getElementById('whatsapp-icon').click();
-        };
-        document.body.appendChild(s);
-        window.chatbotLoaded = true;
-        e.preventDefault(); // Evita que el primer clic haga nada
-        }
-        this.removeEventListener('click', loadChatbotScript);
-    });
-    </script>
+    <script type="module" src="assets/js/chatbot-bundle.js"></script>
+</body>
 </html>

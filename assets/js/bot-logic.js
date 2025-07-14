@@ -1,29 +1,29 @@
 
 // Domain Layer
-export class BotLogic {
-  constructor(ui) {
-    this.ui = ui;
-    this.botAnswered = false;
+export class  BotLogic{
+  constructor(u){
+    this.ui=u;
+    this.botAnswered=false;
   }
-
-  startBotTyping() {
+  startBotTyping(){
     this.ui.setBotTyping("escribiendo...");
-    setTimeout(() => {
+    setTimeout(()=>{
       this.streamBotResponse("¡Hola! ¿En qué puedo ayudarte?");
-    }, 1200);
+    },1200);
   }
-
-  streamBotResponse(text) {
+  streamBotResponse(t){
     this.ui.setBotTyping("");
-    let i = 0;
-    const typeLetter = () => {
-      if (i < text.length) {
-        this.ui.botTyping.textContent += text[i];
+    let i=0;
+    const typeLetter=()=>{
+      if(i<t.length){
+        this.ui.botTyping.textContent+=t[i];
         i++;
-        setTimeout(typeLetter, 40);
-      } else {
-        this.botAnswered = true;
-        this.ui.setBadge(true);
+        setTimeout(typeLetter,40);
+      }else{
+        this.botAnswered=true;
+        setTimeout(()=>{
+          this.ui.setBadge(true);
+        },3000);
       }
     };
     typeLetter();
