@@ -1,7 +1,9 @@
 {
   "devDependencies": {
     "jest": "^30.0.4",
-    "jest-environment-jsdom": "^30.0.4"
+    "jest-environment-jsdom": "^30.0.4",
+    "madge": "^8.0.0",
+    "prettier": "^3.6.2"
   },
   "type": "module",
   "scripts": {

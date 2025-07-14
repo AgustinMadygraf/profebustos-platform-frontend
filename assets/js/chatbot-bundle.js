@@ -1,23 +1,22 @@
-console.log("[chatbot-bundle.js] Script cargado");
+console.log('[chatbot-bundle.js] Script cargado');
 
 import { ChatBotUI } from './chatbot-ui.js';
 import { BotLogic } from './bot-logic.js';
 import { SoundPlayer } from './sound-player.js';
 import { NotificationBadge } from './notification-badge.js';
+import { logInfo } from './helpers/logging.js';
 
 class ChatBotApp {
-  constructor() {
-    this.ui = new ChatBotUI();
-    this.logic = new BotLogic(this.ui);
-
+  constructor({ ui, logic, soundPlayer, notificationBadge }) {
+    this.ui = ui;
+    this.logic = logic;
+    this.soundPlayer = soundPlayer;
+    this.notificationBadge = notificationBadge;
     this.userInteracted = false;
     this.badgePending = false;
     this.chatOpenedEarly = false;
     this.preventNotification = false; // NUEVO
 
-
-    this.notificationBadge = new NotificationBadge(this.ui.badge);
-    this.soundPlayer = new SoundPlayer('assets/sounds/whatsapp-notification.m4a');
     this.notificationBadge.hide();
 
     // Detectar interacción del usuario
@@ -35,10 +34,11 @@ class ChatBotApp {
     window.addEventListener('click', interactionHandler);
     window.addEventListener('touchstart', interactionHandler);
     window.addEventListener('keydown', interactionHandler);
+    logInfo('Listeners de interacción agregados');
 
     // Evento para abrir el chat
-    this.ui.icon.addEventListener("click", () => {
-      console.log("[ChatBotApp] WhatsApp icon clicked");
+    this.ui.icon.addEventListener('click', () => {
+      logInfo('WhatsApp icon clicked');
       this.ui.showChat();
       this.logic.startBotTyping();
       // Si el chat se abre antes de los 5 segundos, marca la bandera para omitir notificaciones
@@ -48,22 +48,23 @@ class ChatBotApp {
     });
 
     // Evento para enviar mensaje
-    this.ui.sendBtn.addEventListener("click", () => {
+    this.ui.sendBtn.addEventListener('click', () => {
       const msg = this.ui.userInput.value.trim();
       if (msg) {
+        logInfo('Mensaje de usuario enviado: ' + msg);
         this.ui.showUserMessage(msg);
-        this.ui.userInput.value = "";
+        this.ui.userInput.value = '';
       }
     });
 
     // Evento para cerrar el chat
-    this.ui.closeBtn.addEventListener("click", () => {
-      console.log("[ChatBotApp] Minimize (close) button clicked");
+    this.ui.closeBtn.addEventListener('click', () => {
+      logInfo('Minimize (close) button clicked');
       this.ui.hideChat();
     });
 
-    this.ui.backBtn.addEventListener("click", () => {
-      console.log("[ChatBotApp] Minimize (back) button clicked");
+    this.ui.backBtn.addEventListener('click', () => {
+      logInfo('Minimize (back) button clicked');
       this.ui.hideChat();
     });
 
@@ -88,15 +89,22 @@ class ChatBotApp {
 }
 
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded",()=>{console.log("[chatbot-bundle.js] DOMContentLoaded");
-  new ChatBotApp();
-});
-
-}else{
-  console.log("[chatbot-bundle.js] DOM ya cargado");
-
-  new ChatBotApp();
-
+function createApp() {
+  var ui = new ChatBotUI();
+  var logic = new BotLogic(ui);
+  var soundPlayer = new SoundPlayer('assets/sounds/whatsapp-notification.m4a');
+  var notificationBadge = new NotificationBadge(ui.badge);
+  new ChatBotApp({ ui: ui, logic: logic, soundPlayer: soundPlayer, notificationBadge: notificationBadge });
 }
-console.log("[chatbot-bundle.js] Script ejecutado");
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('[chatbot-bundle.js] DOMContentLoaded');
+    createApp();
+  });
+} else {
+  console.log('[chatbot-bundle.js] DOM ya cargado');
+  createApp();
+}
+
+console.log('[chatbot-bundle.js] Script ejecutado');
