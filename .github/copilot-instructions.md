@@ -73,14 +73,6 @@ Los scripts manipulan el DOM con `addEventListener`; los sonidos se reproducen c
 
 ---
 
-# NUEVA FUNCIONALIDAD A EVALUAR
-
-> **“Al recibir una notificación debe sonar primero la alerta y, después, mostrarse el badge con el número 1.”**
-
-Analiza si el *codebase* permite añadir esta funcionalidad **sin refactor** o si hace falta **refactorizar antes**.  
-Incluye un **plan de integración** (paso a paso, esfuerzo) y los **puntos de extensión** recomendados.
-
----
 
 # FORMATO DE SALIDA
 

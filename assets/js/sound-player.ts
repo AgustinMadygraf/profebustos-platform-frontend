@@ -1,6 +1,7 @@
 import { logError } from './helpers/logging.js';
 
-export class SoundPlayer {
+import { ISoundPlayer } from './interfaces/ISoundPlayer.js';
+export class SoundPlayer implements ISoundPlayer {
   private audio: HTMLAudioElement;
   
   constructor(src: string) {

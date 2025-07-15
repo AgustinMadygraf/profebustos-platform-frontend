@@ -1,5 +1,6 @@
+import { IUI } from './interfaces/IUI.js';
 // UI Layer
-export class ChatBotUI {
+export class ChatBotUI implements IUI {
   icon: HTMLElement | null;
   chat: HTMLElement | null;
   badge: HTMLElement | null;
@@ -10,7 +11,7 @@ export class ChatBotUI {
   userInput: HTMLInputElement | null;
   sendBtn: HTMLElement | null;
   messagesContainer: HTMLElement | null;
-  
+
   constructor() {
     this.icon = document.getElementById('whatsapp-icon');
     this.chat = document.getElementById('whatsapp-chat');
@@ -32,7 +33,7 @@ export class ChatBotUI {
       this.messagesContainer.appendChild(div);
     }
   }
-  
+
   showChat(): void {
     if (this.chat && this.icon && this.badge) {
       this.chat.classList.remove('d-none');
@@ -40,7 +41,7 @@ export class ChatBotUI {
       this.badge.classList.add('d-none');
     }
   }
-  
+
   hideChat(fadeOut: boolean = false): void {
     if (this.chat && this.icon) {
       this.chat.classList.add('d-none');
@@ -50,19 +51,19 @@ export class ChatBotUI {
       }
     }
   }
-  
+
   setBadge(visible: boolean): void {
     if (this.badge) {
       this.badge.classList.toggle('d-none', !visible);
     }
   }
-  
+
   setBotTyping(text: string): void {
     if (this.botTyping) {
       this.botTyping.textContent = text;
     }
   }
-  
+
   adjustChatSize(): void {
     if (this.chat) {
       if (window.innerWidth < 768) {

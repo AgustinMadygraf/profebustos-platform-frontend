@@ -2,22 +2,26 @@ import { ChatBotUI } from '../chatbot-ui.js';
 import { BotLogic } from '../domain/bot-logic.js';
 import { SoundPlayer } from '../sound-player.js';
 import { NotificationBadge } from '../notification-badge.js';
+import { IUI } from '../interfaces/IUI.js';
+import { IBotLogic } from '../interfaces/IBotLogic.js';
+import { ISoundPlayer } from '../interfaces/ISoundPlayer.js';
+import { INotificationBadge } from '../interfaces/INotificationBadge.js';
 import { logInfo } from '../helpers/logging.js';
 
 console.log('[chatbot-bundle.js] Script cargado');
 
 interface ChatBotAppDependencies {
-  ui: ChatBotUI;
-  logic: BotLogic;
-  soundPlayer: SoundPlayer;
-  notificationBadge: NotificationBadge;
+  ui: IUI;
+  logic: IBotLogic;
+  soundPlayer: ISoundPlayer;
+  notificationBadge: INotificationBadge;
 }
 
 export class ChatBotApp {
-  private ui: ChatBotUI;
-  private logic: BotLogic;
-  private soundPlayer: SoundPlayer;
-  private notificationBadge: NotificationBadge;
+  private ui: IUI;
+  private logic: IBotLogic;
+  private soundPlayer: ISoundPlayer;
+  private notificationBadge: INotificationBadge;
   private userInteracted: boolean = false;
   private badgePending: boolean = false;
   private preventNotification: boolean = false;

@@ -1,5 +1,7 @@
 // Servicio para mostrar y ocultar el badge de notificación
-export class NotificationBadge {
+import { INotificationBadge } from './interfaces/INotificationBadge.js';
+// Servicio para mostrar y ocultar el badge de notificación
+export class NotificationBadge implements INotificationBadge {
   private _badge: HTMLElement | null;
   
   constructor(badgeElement: HTMLElement | null) {
