@@ -1,4 +1,4 @@
-import { SoundPlayer } from '../sound-player';
+import { SoundPlayer } from '../services/sound-player';
 const { logError } = require('../helpers/logging.js');
 
 jest.mock('../helpers/logging.js');

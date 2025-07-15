@@ -1,7 +1,7 @@
-import { ChatBotUI } from '../chatbot-ui.js';
+import { ChatBotUI } from '../ui/chatbot-ui.js';
 import { BotLogic } from '../domain/bot-logic.js';
-import { SoundPlayer } from '../sound-player.js';
-import { NotificationBadge } from '../notification-badge.js';
+import { SoundPlayer } from '../services/sound-player.js';
+import { NotificationBadge } from '../services/notification-badge.js';
 import { ChatBotApp } from './chatbot-bundle.js';
 import { EventBus } from '../helpers/event-bus.js';
 

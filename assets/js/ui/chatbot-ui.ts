@@ -1,4 +1,4 @@
-import { IUI } from './interfaces/IUI.js';
+import { IUI } from '../interfaces/IUI.js';
 // UI Layer
 export class ChatBotUI implements IUI {
   icon: HTMLElement | null;

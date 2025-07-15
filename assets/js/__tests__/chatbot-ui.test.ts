@@ -1,4 +1,4 @@
-import { ChatBotUI } from '../chatbot-ui';
+import { ChatBotUI } from '../ui/chatbot-ui';
 
 describe('ChatBotUI', () => {
   let ui: ChatBotUI;
