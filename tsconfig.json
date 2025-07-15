@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "ES2015",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": false,
+    "strictNullChecks": false,
+    "outDir": "./dist",
+    "rootDir": "./assets",
+    "sourceMap": true,
+    "allowJs": true, // Permitir archivos JavaScript
+    "checkJs": false // No verificar tipos en archivos JS
+  },
+  "include": ["assets/**/*.ts", "assets/**/*.js", "global.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}

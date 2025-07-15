@@ -1,4 +1,4 @@
-import { logInfo, logWarn, logError } from '../helpers/logging.js';
+import { logInfo, logWarn, logError } from '../helpers/logging';
 
 describe('helpers/logging.js', () => {
   let originalInfo, originalWarn, originalError;

@@ -1,9 +1,9 @@
 // Test para validar que el badge no reaparece si el chat está abierto
-import { ChatBotUI } from '../chatbot-ui.js';
-import { BotLogic } from '../bot-logic.js';
-import { SoundPlayer } from '../sound-player.js';
-import { NotificationBadge } from '../notification-badge.js';
-import { ChatBotApp } from '../chatbot-bundle.js';
+import { ChatBotUI } from '../chatbot-ui';
+import { BotLogic } from '../bot-logic';
+import { SoundPlayer } from '../sound-player';
+import { NotificationBadge } from '../notification-badge';
+import { ChatBotApp } from '../chatbot-bundle';
 
 describe('Integración: El badge no reaparece si el chat está abierto', () => {
   let ui, logic, soundPlayer, notificationBadge, iconElem, badgeElem;

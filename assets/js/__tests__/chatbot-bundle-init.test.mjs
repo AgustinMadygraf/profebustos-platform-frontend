@@ -1,4 +1,4 @@
-import { ChatBotApp } from '../chatbot-bundle.js';
+import { ChatBotApp } from '../chatbot-bundle';
 
 describe('chatbot-bundle.js - inicialización automática', () => {
   it('llama addEventListener si document.readyState === "loading" y no ejecuta createApp directamente', () => {

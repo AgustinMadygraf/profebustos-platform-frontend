@@ -1,7 +1,7 @@
 
 
 // ...existing code...
-import { SoundPlayer } from '../sound-player.js';
+import { SoundPlayer } from '../sound-player';
 
 describe('SoundPlayer', () => {
   const src = 'test.mp3';

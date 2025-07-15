@@ -1,12 +1,12 @@
 {
-  "devDependencies": {
-    "jest": "^30.0.4",
-    "jest-environment-jsdom": "^30.0.4",
-    "madge": "^8.0.0",
-    "prettier": "^3.6.2"
-  },
-  "type": "module",
+  "name": "profebustos-platform-frontend",
+  "version": "1.0.0",
+  "description": "Frontend platform for Prof. Bustos website",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage --silent"
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
   }
 }

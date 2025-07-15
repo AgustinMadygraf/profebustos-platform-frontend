@@ -1,9 +1,9 @@
 
-import { ChatBotUI } from '../chatbot-ui.js';
-import { BotLogic } from '../bot-logic.js';
-import { SoundPlayer } from '../sound-player.js';
-import { NotificationBadge } from '../notification-badge.js';
-import { ChatBotApp } from '../chatbot-bundle.js';
+import { ChatBotUI } from '../chatbot-ui';
+import { BotLogic } from '../bot-logic';
+import { SoundPlayer } from '../sound-player';
+import { NotificationBadge } from '../notification-badge';
+import { ChatBotApp } from '../chatbot-bundle';
 import { jest } from '@jest/globals';
 
 describe('ChatBotApp - showBadgeWithSound', () => {

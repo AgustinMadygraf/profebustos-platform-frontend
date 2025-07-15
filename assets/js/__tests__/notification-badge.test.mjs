@@ -1,5 +1,5 @@
 // Prueba unitaria básica para NotificationBadge
-import { NotificationBadge } from '../notification-badge.js';
+import { NotificationBadge } from '../notification-badge';
 
 describe('NotificationBadge', () => {
   let badgeElem;

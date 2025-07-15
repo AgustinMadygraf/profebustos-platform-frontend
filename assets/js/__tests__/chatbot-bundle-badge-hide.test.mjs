@@ -1,9 +1,9 @@
 // Test para verificar que el badge se oculta al abrir el chat
-import { NotificationBadge } from '../notification-badge.js';
-import { ChatBotUI } from '../chatbot-ui.js';
-import { BotLogic } from '../bot-logic.js';
-import { SoundPlayer } from '../sound-player.js';
-import { ChatBotApp } from '../chatbot-bundle.js';
+import { NotificationBadge } from '../notification-badge';
+import { ChatBotUI } from '../chatbot-ui';
+import { BotLogic } from '../bot-logic';
+import { SoundPlayer } from '../sound-player';
+import { ChatBotApp } from '../chatbot-bundle';
 
 describe('Integración: Ocultar badge al abrir chat', () => {
   let badgeElem, iconElem, ui, logic, soundPlayer, notificationBadge;

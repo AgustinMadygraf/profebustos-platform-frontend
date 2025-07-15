@@ -1,4 +1,4 @@
-import { ChatBotUI } from '../chatbot-ui.js';
+import { ChatBotUI } from '../chatbot-ui';
 
 describe('ChatBotUI', () => {
   beforeEach(() => {
