@@ -7,27 +7,32 @@ describe('SoundPlayer', () => {
   const src = 'test.mp3';
 
   beforeEach(() => {
-    // Mock global Audio para cada test
-    global.Audio = function(src) {
-      this.src = src;
-      this.currentTime = 0;
-      this.play = async () => {};
-      this.onended = null;
-    };
+    // Mock global Audio usando clase para compatibilidad con TypeScript
+    class MockAudio {
+      src: string;
+      currentTime = 0;
+      play = jest.fn().mockResolvedValue(undefined);
+      onended: (() => void) | null = null;
+      constructor(src: string) {
+        this.src = src;
+      }
+    }
+    global.Audio = MockAudio as any;
   });
 
   it('crea el objeto Audio con el src correcto', () => {
     const player = new SoundPlayer(src);
-    expect(player.audio.src).toBe(src);
+    // Acceso indirecto para evitar error de propiedad privada
+    expect((player as any).audio.src).toBe(src);
   });
 
   it('play reinicia el audio y llama play()', async () => {
     const player = new SoundPlayer(src);
     let called = false;
-    player.audio.play = async () => { called = true; };
-    player.audio.currentTime = 5;
+    (player as any).audio.play = async () => { called = true; };
+    (player as any).audio.currentTime = 5;
     await player.play();
-    expect(player.audio.currentTime).toBe(0);
+    expect((player as any).audio.currentTime).toBe(0);
     expect(called).toBe(true);
   });
 
@@ -36,7 +41,7 @@ describe('SoundPlayer', () => {
     let onEndCalled = false;
     const onEnd = () => { onEndCalled = true; };
     await player.play(onEnd);
-    expect(typeof player.audio.onended).toBe('function');
+    expect(typeof (player as any).audio.onended).toBe('function');
   });
 
   it('play llama logError si play() falla', async () => {
@@ -46,7 +51,7 @@ describe('SoundPlayer', () => {
     let args;
     console.error = (...a) => { called = true; args = a; };
     const player = new SoundPlayer(src);
-    player.audio.play = async () => { throw 'error'; };
+    (player as any).audio.play = async () => { throw 'error'; };
     await player.play();
     expect(called).toBe(true);
     expect(args[0]).toBe('[ERROR]');

@@ -72,7 +72,7 @@ describe('chatbot-bundle.js - inicialización automática', () => {
 
   it('no ejecuta createApp si está en entorno de test', () => {
     // readyState ya mockeado como 'complete'
-    global.process = { env: { JEST_WORKER_ID: '1' } };
+(global.process as any).env = { JEST_WORKER_ID: '1' };
     let called = false;
     window.createApp = () => { called = true; };
     if (typeof process === 'undefined' || !process.env?.JEST_WORKER_ID) {
