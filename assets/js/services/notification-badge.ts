@@ -1,5 +1,6 @@
 // Servicio para mostrar y ocultar el badge de notificación
 import { INotificationBadge } from '../interfaces/INotificationBadge.js';
+import { showElement, hideElement } from '../helpers/dom';
 // Servicio para mostrar y ocultar el badge de notificación
 export class NotificationBadge implements INotificationBadge {
   private _badge: HTMLElement | null;
@@ -10,41 +11,15 @@ export class NotificationBadge implements INotificationBadge {
   
   show(count: number = 1): void {
     if (this._badge) {
-      console.log(
-        '[NotificationBadge] show called, count:',
-        count,
-        'classList:',
-        this._badge.classList.value,
-        'text:',
-        this._badge.textContent,
-      );
       this._badge.textContent = count.toString();
-      this._badge.classList.remove('d-none');
-      console.log(
-        '[NotificationBadge] after show, classList:',
-        this._badge.classList.value,
-        'text:',
-        this._badge.textContent,
-      );
+      showElement(this._badge);
     }
   }
   
   hide(): void {
     if (this._badge) {
-      console.log(
-        '[NotificationBadge] hide called, classList:',
-        this._badge.classList.value,
-        'text:',
-        this._badge.textContent,
-      );
-      this._badge.classList.add('d-none');
+      hideElement(this._badge);
       this._badge.textContent = '';
-      console.log(
-        '[NotificationBadge] after hide, classList:',
-        this._badge.classList.value,
-        'text:',
-        this._badge.textContent,
-      );
     }
   }
 }
