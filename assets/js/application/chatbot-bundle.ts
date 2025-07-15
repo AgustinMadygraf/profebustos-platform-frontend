@@ -1,8 +1,8 @@
-import { ChatBotUI } from './chatbot-ui.js';
-import { BotLogic } from './bot-logic.js';
-import { SoundPlayer } from './sound-player.js';
-import { NotificationBadge } from './notification-badge.js';
-import { logInfo } from './helpers/logging.js';
+import { ChatBotUI } from '../chatbot-ui.js';
+import { BotLogic } from '../domain/bot-logic.js';
+import { SoundPlayer } from '../sound-player.js';
+import { NotificationBadge } from '../notification-badge.js';
+import { logInfo } from '../helpers/logging.js';
 
 console.log('[chatbot-bundle.js] Script cargado');
 

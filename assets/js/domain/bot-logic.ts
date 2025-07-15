@@ -1,5 +1,5 @@
 // Domain Layer
-import { ChatBotUI } from './chatbot-ui';
+import { ChatBotUI } from '../chatbot-ui';
 
 export class BotLogic {
   ui: ChatBotUI;
