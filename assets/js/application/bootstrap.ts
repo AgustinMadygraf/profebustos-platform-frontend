@@ -30,7 +30,9 @@ export function bootstrapChatBotApp(): void {
       const msg = ui.userInput?.value.trim() || '';
       if (msg) {
         eventBus.emit('user:sendMessage', msg);
-        ui.userInput.value = '';
+        if (ui.userInput) {
+          ui.userInput.value = '';
+        }
       }
     });
   }
