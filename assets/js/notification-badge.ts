@@ -29,7 +29,20 @@ export class NotificationBadge {
   
   hide(): void {
     if (this._badge) {
+      console.log(
+        '[NotificationBadge] hide called, classList:',
+        this._badge.classList.value,
+        'text:',
+        this._badge.textContent,
+      );
       this._badge.classList.add('d-none');
+      this._badge.textContent = '';
+      console.log(
+        '[NotificationBadge] after hide, classList:',
+        this._badge.classList.value,
+        'text:',
+        this._badge.textContent,
+      );
     }
   }
 }

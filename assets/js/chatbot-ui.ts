@@ -9,6 +9,7 @@ export class ChatBotUI {
   botMessageDiv: HTMLElement | null;
   userInput: HTMLInputElement | null;
   sendBtn: HTMLElement | null;
+  messagesContainer: HTMLElement | null;
   
   constructor() {
     this.icon = document.getElementById('whatsapp-icon');
@@ -20,39 +21,39 @@ export class ChatBotUI {
     this.botMessageDiv = document.getElementById('bot-message');
     this.userInput = document.getElementById('whatsapp-user-input') as HTMLInputElement;
     this.sendBtn = document.getElementById('whatsapp-send-btn');
+    this.messagesContainer = document.getElementById('whatsapp-messages');
   }
 
   showUserMessage(msg: string): void {
-    // Implementa esta función según su lógica original
+    if (this.messagesContainer) {
+      const div = document.createElement('div');
+      div.className = 'user-message mb-2 text-end';
+      div.textContent = msg;
+      this.messagesContainer.appendChild(div);
+    }
   }
   
   showChat(): void {
-    if (this.chat) {
+    if (this.chat && this.icon && this.badge) {
       this.chat.classList.remove('d-none');
+      this.icon.classList.add('d-none');
+      this.badge.classList.add('d-none');
     }
   }
   
   hideChat(fadeOut: boolean = false): void {
-    if (this.chat) {
-      if (fadeOut) {
-        this.chat.classList.add('fade-out');
-        setTimeout(() => {
-          this.chat.classList.add('d-none');
-          this.chat.classList.remove('fade-out');
-        }, 500);
-      } else {
-        this.chat.classList.add('d-none');
+    if (this.chat && this.icon) {
+      this.chat.classList.add('d-none');
+      this.icon.classList.remove('d-none');
+      if (!fadeOut && this.badge) {
+        this.badge.classList.remove('d-none');
       }
     }
   }
   
   setBadge(visible: boolean): void {
     if (this.badge) {
-      if (visible) {
-        this.badge.classList.remove('d-none');
-      } else {
-        this.badge.classList.add('d-none');
-      }
+      this.badge.classList.toggle('d-none', !visible);
     }
   }
   
@@ -63,6 +64,16 @@ export class ChatBotUI {
   }
   
   adjustChatSize(): void {
-    // Implementa según la lógica original
+    if (this.chat) {
+      if (window.innerWidth < 768) {
+        this.chat.style.width = '100vw';
+        this.chat.style.height = '100vh';
+        this.chat.style.borderRadius = '0';
+      } else {
+        this.chat.style.width = '350px';
+        this.chat.style.height = '420px';
+        this.chat.style.borderRadius = '1.5rem';
+      }
+    }
   }
 }
