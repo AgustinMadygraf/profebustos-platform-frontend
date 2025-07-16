@@ -4,13 +4,15 @@
   "description": "Frontend platform for Prof. Bustos website",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && tsc && node scripts/inject-version.js",
     "watch": "tsc --watch",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@jest/globals": "^30.0.4",
     "@types/jest": "^30.0.0",
+    "husky": "^8.0.0",
     "jest": "^30.0.4",
     "jest-environment-jsdom": "^30.0.4",
     "rimraf": "^5.0.10",
