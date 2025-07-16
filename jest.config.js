@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   transform: {},
@@ -21,7 +21,7 @@ module.exports = {
   globals: {
     'ts-jest': {
       useESM: false,
-    }
+    },
   },
   extensionsToTreatAsEsm: ['.ts'],
 };

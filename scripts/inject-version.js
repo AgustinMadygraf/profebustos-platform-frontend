@@ -11,7 +11,7 @@ const version = pkg.version;
 let html = fs.readFileSync(htmlPath, 'utf8');
 
 // Reemplaza el texto vX.Y.Z en el footer por la versión actual
-html = html.replace(/<footer[^>]*>\s*v[0-9]+\.[0-9]+\.[0-9]+/i, match => {
+html = html.replace(/<footer[^>]*>\s*v[0-9]+\.[0-9]+\.[0-9]+/i, (match) => {
   return match.replace(/v[0-9]+\.[0-9]+\.[0-9]+/, `v${version}`);
 });
 

@@ -1,5 +1,3 @@
-
-
 import { ChatBotApp, createApp } from '../chatbot-bundle';
 import { ChatBotUI } from '../chatbot-ui.js';
 import { BotLogic } from '../bot-logic.js';

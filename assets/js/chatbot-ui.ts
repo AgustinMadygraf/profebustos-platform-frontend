@@ -36,7 +36,7 @@ export class ChatBotUI {
       this.dom.appendChild(this.messagesContainer, div);
     }
   }
-  
+
   showChat(): void {
     if (this.chat && this.icon && this.badge) {
       this.chat.classList.remove('d-none');
@@ -44,7 +44,7 @@ export class ChatBotUI {
       this.badge.classList.add('d-none');
     }
   }
-  
+
   hideChat(fadeOut: boolean = false): void {
     if (this.chat && this.icon) {
       this.chat.classList.add('d-none');
@@ -54,19 +54,19 @@ export class ChatBotUI {
       }
     }
   }
-  
+
   setBadge(visible: boolean): void {
     if (this.badge) {
       this.badge.classList.toggle('d-none', !visible);
     }
   }
-  
+
   setBotTyping(text: string): void {
     if (this.botTyping) {
       this.botTyping.textContent = text;
     }
   }
-  
+
   adjustChatSize(): void {
     if (this.chat) {
       if (window.innerWidth < 768) {

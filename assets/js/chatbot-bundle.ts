@@ -22,16 +22,16 @@ export class ChatBotApp {
   private badgePending: boolean = false;
   private preventNotification: boolean = false;
   private isChatOpen: boolean = false;
-  
+
   constructor({ ui, logic, soundPlayer, notificationBadge }: ChatBotAppDependencies) {
     this.ui = ui;
     this.logic = logic;
     this.soundPlayer = soundPlayer;
     this.notificationBadge = notificationBadge;
-    
+
     this.notificationBadge.hide();
     console.log('[ChatBotApp] constructor, isChatOpen:', this.isChatOpen);
-    
+
     // Detectar interacción del usuario
     const interactionHandler = () => {
       this.userInteracted = true;
@@ -48,7 +48,7 @@ export class ChatBotApp {
     window.addEventListener('touchstart', interactionHandler);
     window.addEventListener('keydown', interactionHandler);
     logInfo('Listeners de interacción agregados');
-    
+
     // Evento para abrir el chat
     if (this.ui.icon) {
       this.ui.icon.addEventListener('click', () => {
@@ -58,13 +58,13 @@ export class ChatBotApp {
         this.isChatOpen = true;
         console.log('[ChatBotApp] chat abierto, isChatOpen:', this.isChatOpen);
         this.logic.startBotTyping();
-        
+
         if (!this.badgePending) {
           this.preventNotification = true;
         }
       });
     }
-    
+
     // Evento para enviar mensaje
     if (this.ui.sendBtn && this.ui.userInput) {
       this.ui.sendBtn.addEventListener('click', () => {
@@ -78,7 +78,7 @@ export class ChatBotApp {
         }
       });
     }
-    
+
     // Eventos para cerrar el chat
     if (this.ui.closeBtn) {
       this.ui.closeBtn.addEventListener('click', () => {
@@ -88,7 +88,7 @@ export class ChatBotApp {
         console.log('[ChatBotApp] chat cerrado, isChatOpen:', this.isChatOpen);
       });
     }
-    
+
     if (this.ui.backBtn) {
       this.ui.backBtn.addEventListener('click', () => {
         logInfo('Minimize (back) button clicked');
@@ -97,7 +97,7 @@ export class ChatBotApp {
         console.log('[ChatBotApp] chat cerrado (back), isChatOpen:', this.isChatOpen);
       });
     }
-    
+
     // Esperar 5 segundos
     setTimeout(() => {
       if (!this.preventNotification) {
@@ -125,12 +125,11 @@ export class ChatBotApp {
   }
 }
 
-
 export function createApp(
   ui?: ChatBotUI,
   logic?: BotLogic,
   soundPlayer?: SoundPlayer,
-  notificationBadge?: NotificationBadge
+  notificationBadge?: NotificationBadge,
 ): void {
   const _ui = ui || new ChatBotUI();
   const _logic = logic || new BotLogic(_ui);
@@ -141,7 +140,7 @@ export function createApp(
     ui: _ui,
     logic: _logic,
     soundPlayer: _soundPlayer,
-    notificationBadge: _notificationBadge
+    notificationBadge: _notificationBadge,
   });
 }
 
