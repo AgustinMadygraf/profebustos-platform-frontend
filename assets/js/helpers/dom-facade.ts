@@ -1,5 +1,6 @@
+import { IUIFacade } from './interfaces';
 // Facade para acceso testable al DOM
-export class DomFacade {
+export class DomFacade implements IUIFacade {
   getById(id: string): HTMLElement | null {
     return document.getElementById(id);
   }

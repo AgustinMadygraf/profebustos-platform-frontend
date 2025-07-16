@@ -125,22 +125,29 @@ export class ChatBotApp {
   }
 }
 
-function createApp(): void {
-  const ui = new ChatBotUI();
-  const logic = new BotLogic(ui);
-  const soundPlayer = new SoundPlayer('assets/sounds/whatsapp-notification.m4a');
-  const notificationBadge = new NotificationBadge(ui.badge);
-  
+
+export function createApp(
+  ui?: ChatBotUI,
+  logic?: BotLogic,
+  soundPlayer?: SoundPlayer,
+  notificationBadge?: NotificationBadge
+): void {
+  const _ui = ui || new ChatBotUI();
+  const _logic = logic || new BotLogic(_ui);
+  const _soundPlayer = soundPlayer || new SoundPlayer('assets/sounds/whatsapp-notification.m4a');
+  const _notificationBadge = notificationBadge || new NotificationBadge(_ui.badge);
+
   new ChatBotApp({
-    ui,
-    logic,
-    soundPlayer,
-    notificationBadge
+    ui: _ui,
+    logic: _logic,
+    soundPlayer: _soundPlayer,
+    notificationBadge: _notificationBadge
   });
 }
 
 // Solo ejecuta createApp automáticamente si no está en entorno de test (Jest)
 declare const process: any;
+
 if (typeof process === 'undefined' || !process.env.JEST_WORKER_ID) {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {

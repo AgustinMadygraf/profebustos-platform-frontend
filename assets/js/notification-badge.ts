@@ -1,5 +1,6 @@
+import { IBadgeService } from './helpers/interfaces';
 // Servicio para mostrar y ocultar el badge de notificación
-export class NotificationBadge {
+export class NotificationBadge implements IBadgeService {
   private _badge: HTMLElement | null;
   
   constructor(badgeElement: HTMLElement | null) {
@@ -27,6 +28,12 @@ export class NotificationBadge {
     }
   }
   
+  set(count: number): void {
+    if (this._badge) {
+      this._badge.textContent = count.toString();
+    }
+  }
+
   hide(): void {
     if (this._badge) {
       console.log(
