@@ -1,4 +1,5 @@
 // UI Layer
+import { DomFacade } from './helpers/dom-facade.js';
 export class ChatBotUI {
   icon: HTMLElement | null;
   chat: HTMLElement | null;
@@ -10,26 +11,29 @@ export class ChatBotUI {
   userInput: HTMLInputElement | null;
   sendBtn: HTMLElement | null;
   messagesContainer: HTMLElement | null;
-  
-  constructor() {
-    this.icon = document.getElementById('whatsapp-icon');
-    this.chat = document.getElementById('whatsapp-chat');
-    this.badge = document.getElementById('whatsapp-badge');
-    this.closeBtn = document.getElementById('whatsapp-close');
-    this.backBtn = document.getElementById('whatsapp-back');
-    this.botTyping = document.getElementById('bot-typing');
-    this.botMessageDiv = document.getElementById('bot-message');
-    this.userInput = document.getElementById('whatsapp-user-input') as HTMLInputElement;
-    this.sendBtn = document.getElementById('whatsapp-send-btn');
-    this.messagesContainer = document.getElementById('whatsapp-messages');
+  dom: DomFacade;
+
+  constructor(domFacade?: DomFacade) {
+    // Permite inyectar un facade custom para test
+    this.dom = domFacade || new DomFacade();
+    this.icon = this.dom.getById('whatsapp-icon');
+    this.chat = this.dom.getById('whatsapp-chat');
+    this.badge = this.dom.getById('whatsapp-badge');
+    this.closeBtn = this.dom.getById('whatsapp-close');
+    this.backBtn = this.dom.getById('whatsapp-back');
+    this.botTyping = this.dom.getById('bot-typing');
+    this.botMessageDiv = this.dom.getById('bot-message');
+    this.userInput = this.dom.getById('whatsapp-user-input') as HTMLInputElement;
+    this.sendBtn = this.dom.getById('whatsapp-send-btn');
+    this.messagesContainer = this.dom.getById('whatsapp-messages');
   }
 
   showUserMessage(msg: string): void {
     if (this.messagesContainer) {
-      const div = document.createElement('div');
+      const div = this.dom.createElement('div');
       div.className = 'user-message mb-2 text-end';
       div.textContent = msg;
-      this.messagesContainer.appendChild(div);
+      this.dom.appendChild(this.messagesContainer, div);
     }
   }
   

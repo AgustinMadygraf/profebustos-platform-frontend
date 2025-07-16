@@ -3,4 +3,5 @@ module.exports = {
   testEnvironment: 'jsdom',
   transform: {},
   moduleNameMapper: {},
+  testMatch: ['<rootDir>/assets/js/__tests__/**/*.ts']
 };

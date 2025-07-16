@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Frontend platform for Prof. Bustos website",
   "scripts": {
-    "build": "tsc",
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc",
     "watch": "tsc --watch",
     "test": "jest"
   },
@@ -12,6 +13,7 @@
     "@types/jest": "^30.0.0",
     "jest": "^30.0.4",
     "jest-environment-jsdom": "^30.0.4",
+    "rimraf": "^5.0.10",
     "ts-jest": "^29.4.0",
     "typescript": "^5.2.2"
   },
