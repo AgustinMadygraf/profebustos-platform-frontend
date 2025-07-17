@@ -1,42 +1,42 @@
-import vuePlugin from 'eslint-plugin-vue';
-import prettierPlugin from 'eslint-plugin-prettier';
-import tsParser from '@typescript-eslint/parser';
-import vueParser from 'vue-eslint-parser';
+import vuePlugin from "eslint-plugin-vue";
+import prettierPlugin from "eslint-plugin-prettier";
+import tsParser from "@typescript-eslint/parser";
+import vueParser from "vue-eslint-parser";
 
 export default [
   {
-    ignores: ['dist', 'coverage', 'node_modules'],
+    ignores: ["dist", "coverage"],
   },
   {
-    files: ['**/*.vue'],
+    files: ["**/*.vue"],
     languageOptions: {
       parser: vueParser,
       ecmaVersion: 2021,
-      sourceType: 'module',
+      sourceType: "module",
     },
     plugins: {
       vue: vuePlugin,
       prettier: prettierPlugin,
     },
     rules: {
-      'vue/multi-word-component-names': 'off',
-      'prettier/prettier': [
-        'error',
+      "vue/multi-word-component-names": "off",
+      "prettier/prettier": [
+        "error",
         {
           semi: true,
           singleQuote: false,
           printWidth: 100,
           tabWidth: 2,
-          trailingComma: 'es5',
+          trailingComma: "es5",
         },
       ],
     },
   },
   {
-    files: ['**/*.js', '**/*.ts'],
+    files: ["**/*.js", "**/*.ts"],
     languageOptions: {
       ecmaVersion: 2021,
-      sourceType: 'module',
+      sourceType: "module",
       parser: tsParser,
     },
     plugins: {
@@ -44,16 +44,16 @@ export default [
       prettier: prettierPlugin,
     },
     rules: {
-      semi: ['error', 'always'],
-      'vue/multi-word-component-names': 'off',
-      'prettier/prettier': [
-        'error',
+      semi: ["error", "always"],
+      "vue/multi-word-component-names": "off",
+      "prettier/prettier": [
+        "error",
         {
           semi: true,
           singleQuote: false,
           printWidth: 100,
           tabWidth: 2,
-          trailingComma: 'es5',
+          trailingComma: "es5",
         },
       ],
     },

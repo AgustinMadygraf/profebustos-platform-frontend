@@ -1,4 +1,4 @@
-import { IAudioFacade } from './interfaces';
+import { IAudioFacade } from "./interfaces";
 // Facade para acceso testable a Audio
 export class AudioFacade implements IAudioFacade {
   create(src: string): HTMLAudioElement {

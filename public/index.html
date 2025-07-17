@@ -7,11 +7,23 @@
   <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="/assets/css/styles.css">
-  <!-- ...otros metatags y scripts legacy... -->
+  <!-- Script de depuración -->
+  <script>
+    console.log("🔍 HTML: Documento cargando");
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("🔍 HTML: DOMContentLoaded disparado");
+      console.log("🔍 HTML: Elemento #app presente:", !!document.getElementById("app"));
+    });
+  </script>
 </head>
 <body>
   <div id="app">
-    <!-- Aquí puedes dejar el HTML legacy para migrar progresivamente -->
+    <!-- Contenido visual de depuración -->
+    <div style="padding: 20px; background-color: #f8f9fa; margin: 20px; border-radius: 8px; border: 1px solid #dee2e6;">
+      <h3>Contenido HTML inicial (antes de que Vue lo controle)</h3>
+      <p>Si ves esto pero no ves el banner verde de Vue, significa que Vue no se está montando correctamente.</p>
+    </div>
+    
     <header class="bg-light border-bottom mb-4" role="banner" aria-label="Encabezado principal">
       <!-- ...contenido legacy... -->
     </header>
@@ -22,6 +34,17 @@
     </main>
     <!-- WhatsApp Chat Widget, footer, etc. -->
   </div>
-  <script type="module" src="/src/main.ts"></script>
+  <!-- IMPORTANTE: Asegúrate de que esta ruta sea correcta -->
+  <script type="module" src="../src/main.ts"></script>
+  <!-- Script alternativo como fallback -->
+  <script>
+    window.addEventListener("load", () => {
+      console.log("🔍 HTML: Ventana completamente cargada");
+      if (!window.vueAppMounted && window.createApp) {
+        console.log("🔄 Intentando montar Vue manualmente después de load");
+        window.createApp();
+      }
+    });
+  </script>
 </body>
 </html>
