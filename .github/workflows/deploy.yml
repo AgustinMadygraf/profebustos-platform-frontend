@@ -30,7 +30,7 @@ jobs:
           cp -r dist deploy/
            cp -r public/img deploy/img
            cp -r assets/css deploy/assets/
-           cp -r assets/sounds deploy/assets/
+           cp -r public/sounds deploy/assets/
            cp index.html deploy/
 
       - name: Deploy to FTP
