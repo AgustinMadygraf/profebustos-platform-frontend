@@ -28,9 +28,9 @@ jobs:
         run: |
           mkdir deploy
           cp -r dist deploy/
-           cp -r public/img deploy/img
+           cp -r public/img deploy/public/
+           cp -r public/sounds deploy/public/
            cp -r assets/css deploy/assets/
-           cp -r public/sounds deploy/assets/
            cp index.html deploy/
 
       - name: Deploy to FTP
