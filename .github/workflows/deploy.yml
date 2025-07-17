@@ -28,10 +28,10 @@ jobs:
         run: |
           mkdir deploy
           cp -r dist deploy/
-          cp -r img deploy/
-          cp -r assets/css deploy/assets/
-          cp -r assets/sounds deploy/assets/
-          cp index.html deploy/
+           cp -r public/img deploy/img
+           cp -r assets/css deploy/assets/
+           cp -r assets/sounds deploy/assets/
+           cp index.html deploy/
 
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.0
